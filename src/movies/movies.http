@@ -1,0 +1,29 @@
+### list movies
+GET http://localhost:3000/movies
+
+### get movies
+GET http://localhost:3000/movies/HjnJoL9dX0pcbLzft3xTk
+
+### create movies
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Filme 1",
+  "description": "Descrição do filme 1",
+  "releaseDate": "2024-09-11",
+  "genres": ["Terror", "Comédia"]
+}
+
+### update movies
+PATCH http://localhost:3000/movies/L8g2a1c6e8XrFaItl3E0l
+Content-Type: application/json
+
+{
+  "title": "Filme 1",
+  "releaseDate": "2024-09-02",
+  "genres": ["Terror"]
+}
+
+### delete movies
+DELETE http://localhost:3000/movies/L8g2a1c6e8XrFaItl3E0l

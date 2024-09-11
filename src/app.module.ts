@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {TypeOrmModule} from "@nestjs/typeorm";
-import { GendersModule } from './genders/genders.module';
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { MoviesModule } from './movies/movies.module';
+import { GenresModule } from './genres/genres.module';
 
 @Module({
     imports: [
@@ -12,7 +13,8 @@ import { GendersModule } from './genders/genders.module';
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,
         }),
-        GendersModule,
+        GenresModule,
+        MoviesModule,
     ],
   controllers: [AppController],
   providers: [AppService],

@@ -6,7 +6,7 @@ import {Gender} from "./entities/gender.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
-export class GendersService {
+export class GenresService {
   constructor(
       @InjectRepository(Gender)
       private readonly repository : Repository<Gender>) { }

@@ -1,19 +1,19 @@
-### list genders
+### list genres
 GET http://localhost:3000/genders
 
 ### get gender
-GET http://localhost:3000/genders/y4QzJx0VC3Fv0JZpKkOwC
+GET http://localhost:3000/genders/HjnJoL9dX0pcbLzft3xTk
 
 ### create gender
 POST http://localhost:3000/genders
 Content-Type: application/json
 
 {
-  "name": "Terror"
+  "name": "Comédia"
 }
 
 ### update gender
-PATCH http://localhost:3000/genders/y4QzJx0VC3Fv0JZpKkOwC
+PATCH http://localhost:3000/genders/HjnJoL9dX0pcbLzft3xTk
 Content-Type: application/json
 
 {
@@ -21,4 +21,4 @@ Content-Type: application/json
 }
 
 ### delete gender
-DELETE http://localhost:3000/genders/y4QzJx0VC3Fv0JZpKkOwC
+DELETE http://localhost:3000/genders/UCajXb5nx5BokOWeZzti_
