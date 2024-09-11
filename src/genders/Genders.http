@@ -2,7 +2,7 @@
 GET http://localhost:3000/genders
 
 ### get gender
-GET http://localhost:3000/genders/1
+GET http://localhost:3000/genders/y4QzJx0VC3Fv0JZpKkOwC
 
 ### create gender
 POST http://localhost:3000/genders
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### update gender
-PATCH http://localhost:3000/genders/1
+PATCH http://localhost:3000/genders/y4QzJx0VC3Fv0JZpKkOwC
 Content-Type: application/json
 
 {
@@ -21,4 +21,4 @@ Content-Type: application/json
 }
 
 ### delete gender
-DELETE http://localhost:3000/genders/1
+DELETE http://localhost:3000/genders/y4QzJx0VC3Fv0JZpKkOwC

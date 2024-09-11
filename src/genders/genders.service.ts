@@ -17,18 +17,23 @@ export class GendersService {
   }
 
   findAll() {
-    return `This action returns all genders`;
+    return this.repository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} gender`;
+  findOne(id: string) {
+    return this.repository.findOneBy({ id });
   }
 
-  update(id: number, updateGenderDto: UpdateGenderDto) {
-    return `This action updates a #${id} gender`;
+  async update(id: string, updateGenderDto: UpdateGenderDto) {
+    const gender = await this.repository.findOneBy({ id });
+    if(!gender) return null;
+    this.repository.merge(gender, updateGenderDto);
+    return this.repository.save(gender);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} gender`;
+  async remove(id: string) {
+    const gender = await this.repository.findOneBy({ id });
+    if(!gender) return null;
+    return this.repository.remove(gender);
   }
 }

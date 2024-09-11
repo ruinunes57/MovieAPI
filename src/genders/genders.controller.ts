@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, NotFoundException} from '@nestjs/common';
 import { GendersService } from './genders.service';
 import { CreateGenderDto } from './dto/create-gender.dto';
 import { UpdateGenderDto } from './dto/update-gender.dto';
@@ -18,17 +18,23 @@ export class GendersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.gendersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const gender = await this.gendersService.findOne(id);
+    if(!gender) throw new NotFoundException('Gender not found');
+    return gender;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGenderDto: UpdateGenderDto) {
-    return this.gendersService.update(+id, updateGenderDto);
+  async update(@Param('id') id: string, @Body() updateGenderDto: UpdateGenderDto) {
+    const gender = await this.gendersService.update(id, updateGenderDto);
+    if(!gender) throw new NotFoundException('Gender not found');
+    return gender;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.gendersService.remove(+id);
+  @HttpCode(204)
+  async remove(@Param('id') id: string) {
+    const gender = await this.gendersService.remove(id);
+    if(!gender) throw new NotFoundException('Gender not found');
   }
 }
