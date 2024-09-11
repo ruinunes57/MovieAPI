@@ -1,0 +1,3 @@
+### list developers
+
+GET http://localhost:3000/developers
