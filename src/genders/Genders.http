@@ -1,0 +1,24 @@
+### list genders
+GET http://localhost:3000/genders
+
+### get gender
+GET http://localhost:3000/genders/1
+
+### create gender
+POST http://localhost:3000/genders
+Content-Type: application/json
+
+{
+  "name": "Terror"
+}
+
+### update gender
+PATCH http://localhost:3000/genders/1
+Content-Type: application/json
+
+{
+  "name": "Comédia"
+}
+
+### delete gender
+DELETE http://localhost:3000/genders/1
