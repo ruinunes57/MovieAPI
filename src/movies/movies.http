@@ -4,15 +4,18 @@ GET http://localhost:3000/movies
 ### get movies
 GET http://localhost:3000/movies/HjnJoL9dX0pcbLzft3xTk
 
+### search movies
+GET http://localhost:3000/movies/search?gender=Terror
+
 ### create movies
 POST http://localhost:3000/movies
 Content-Type: application/json
 
 {
-  "title": "Filme 1",
+  "title": "Filme 2",
   "description": "Descrição do filme 1",
   "releaseDate": "2024-09-11",
-  "genres": ["Terror", "Comédia"]
+  "genres": ["Terror"]
 }
 
 ### update movies

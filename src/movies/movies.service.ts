@@ -38,6 +38,29 @@ export class MoviesService {
     return this.movieRepository.findOneBy({ id });
   }
 
+  async search(title?: string, genderName?: string): Promise<Movie[]> {
+    if (title) {
+      return this.movieRepository.find({
+        where: { title },
+        relations: ['genders'],
+      });
+    }
+
+    if (genderName) {
+      const gender = await this.genderRepository.findOne({ where: { name: genderName } });
+      if (gender) {
+        return this.movieRepository.find({
+          where: { genders: gender },
+          relations: ['genders'],
+        });
+      } else {
+        return null;
+      }
+    }
+
+    return null;
+  }
+
   async update(id: string, updateMovieDto: UpdateMovieDto): Promise<Movie> {
     const { genres, ...movieData } = updateMovieDto;
 

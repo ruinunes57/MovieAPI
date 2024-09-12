@@ -1,7 +1,20 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, NotFoundException} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+  NotFoundException,
+  Query,
+  BadRequestException
+} from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import {Movie} from "./entities/movie.entity";
 
 @Controller('movies')
 export class MoviesController {
@@ -15,6 +28,22 @@ export class MoviesController {
   @Get()
   findAll() {
     return this.moviesService.findAll();
+  }
+
+  @Get('search')
+  async searchMovies(
+      @Query('title') title?: string,
+      @Query('gender') genderName?: string,
+  ): Promise<Movie[]> {
+    if (title && genderName) {
+      throw new BadRequestException('You can only search by title OR genre, not both.');
+    }
+
+    if (!title && !genderName) {
+      throw new BadRequestException('At least title OR genre must be provided.');
+    }
+
+    return this.moviesService.search(title, genderName);
   }
 
   @Get(':id')
