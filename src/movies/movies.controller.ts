@@ -15,18 +15,21 @@ import { MoviesService } from './movies.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
+import {ApiOperation} from "@nestjs/swagger";
 
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create a new movie' })
   create(@Body() createMovieDto: CreateMovieDto) {
     // Pass the data to the service to create a movie
     return this.moviesService.create(createMovieDto);
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all movies' })
   findAll(
       @Query('page') page?: number,
       @Query('limit') limit?: number
@@ -50,6 +53,7 @@ export class MoviesController {
   }
 
   @Get('search')
+  @ApiOperation({ summary: 'Search a movie by title or gender name' })
   async searchMovies(
       @Query('title') title?: string,
       @Query('gender') genderName?: string,
@@ -69,6 +73,7 @@ export class MoviesController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get a movie by ID' })
   async findOne(@Param('id') id: string) {
     // Fetch the movie by ID
     const movie = await this.moviesService.findOne(id);
@@ -80,6 +85,7 @@ export class MoviesController {
   }
 
   @Patch(':id')
+  @ApiOperation({ summary: 'Update a movie by ID' })
   async update(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {
     // Update the movie with the given ID and data
     const movie = await this.moviesService.update(id, updateMovieDto);
@@ -91,6 +97,7 @@ export class MoviesController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete a movie by ID' })
   @HttpCode(204)
   async remove(@Param('id') id: string) {
     // Remove the movie with the given ID

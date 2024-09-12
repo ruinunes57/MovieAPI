@@ -84,6 +84,15 @@ The API includes the following key functionalities:
 
 ---
 
+## **Swagger UI**
+
+- **Access Swagger UI**:
+    ```
+    http://localhost:3000/api
+    ```
+
+---
+
 ## **API Endpoints**
 
 ### **Movies Endpoints**
