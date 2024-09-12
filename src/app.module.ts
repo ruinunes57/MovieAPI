@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import {MiddlewareConsumer, Module, RequestMethod} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { MoviesModule } from './movies/movies.module';
 import { GenresModule } from './genres/genres.module';
+import {LoggerMiddleware} from "./LoggerMiddleware";
 
 @Module({
     imports: [
@@ -19,4 +20,10 @@ import { GenresModule } from './genres/genres.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer
+            .apply(LoggerMiddleware)
+            .forRoutes({ path: '*', method: RequestMethod.ALL });
+    }
+}
