@@ -1,40 +1,58 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, NotFoundException} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, NotFoundException } from '@nestjs/common';
 import { GenresService } from './genres.service';
 import { CreateGenderDto } from './dto/create-gender.dto';
 import { UpdateGenderDto } from './dto/update-gender.dto';
 
-@Controller('genders')
+@Controller('genders')  // Define this controller to handle requests related to "genders"
 export class GenresController {
   constructor(private readonly genresService: GenresService) {}
 
+  // Handle POST requests to create a new gender
   @Post()
   create(@Body() createGenderDto: CreateGenderDto) {
+    // Pass the data to the service to create a new gender
     return this.genresService.create(createGenderDto);
   }
 
+  // Handle GET requests to retrieve all genders
   @Get()
   findAll() {
+    // Return the list of all genders from the service
     return this.genresService.findAll();
   }
 
+  // Handle GET requests to retrieve a gender by its ID
   @Get(':id')
   async findOne(@Param('id') id: string) {
+    // Fetch the gender by ID from the service
     const gender = await this.genresService.findOne(id);
-    if(!gender) throw new NotFoundException('Gender not found');
+
+    // If the gender is not found, throw a NotFoundException
+    if (!gender) throw new NotFoundException('Gender not found');
+
     return gender;
   }
 
+  // Handle PATCH requests to update a gender by its ID
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateGenderDto: UpdateGenderDto) {
+    // Update the gender and check if it exists
     const gender = await this.genresService.update(id, updateGenderDto);
-    if(!gender) throw new NotFoundException('Gender not found');
+
+    // If the gender is not found, throw a NotFoundException
+    if (!gender) throw new NotFoundException('Gender not found');
+
     return gender;
   }
 
+  // Handle DELETE requests to remove a gender by its ID
   @Delete(':id')
-  @HttpCode(204)
+  @HttpCode(204)  // Set the response code to 204 (No Content) on successful deletion
   async remove(@Param('id') id: string) {
+    // Remove the gender by ID and check if it exists
     const gender = await this.genresService.remove(id);
-    if(!gender) throw new NotFoundException('Gender not found');
+
+    // If the gender is not found, throw a NotFoundException
+    if (!gender) throw new NotFoundException('Gender not found');
   }
 }

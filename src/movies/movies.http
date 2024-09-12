@@ -1,5 +1,5 @@
 ### list movies
-GET http://localhost:3000/movies
+GET http://localhost:3000/movies?page=1&limit=5
 
 ### get movies
 GET http://localhost:3000/movies/HjnJoL9dX0pcbLzft3xTk
